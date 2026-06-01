@@ -48,6 +48,16 @@
           <Label col="1" text="Featured" class="p-r-10"></Label>
         </GridLayout>
 
+        <GridLayout
+          columns="auto, *"
+          class="nt-drawer__list-item"
+          [class.-selected]="isComponentSelected('/players')"
+          (tap)="onNavItemTap('/players')"
+        >
+          <Label col="0" text="&#xf500;" class="nt-icon fas"></Label>
+          <Label col="1" text="Players" class="p-r-10"></Label>
+        </GridLayout>
+
         <StackLayout class="hr"></StackLayout>
 
         <GridLayout

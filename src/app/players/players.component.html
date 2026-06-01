@@ -1,0 +1,18 @@
+<ActionBar class="action-bar">
+  <NavigationButton visibility="hidden"></NavigationButton>
+  <GridLayout columns="50, *">
+    <Label class="action-bar-title" text="Players" colSpan="2"></Label>
+    <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
+  </GridLayout>
+</ActionBar>
+
+<StackLayout>
+  <Label [text]="'Players'" class="players-title"></Label>
+  <Label [text]="platformMessage" class="platform-label"></Label>
+
+  <StackLayout *ngFor="let player of players" class="players-item">
+    <Label [text]="player.name"></Label>
+  </StackLayout>
+
+  <Button text="Ver Detalle" (tap)="onGoToDetail()" class="btn btn-primary"></Button>
+</StackLayout>
