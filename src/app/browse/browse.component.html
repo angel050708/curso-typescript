@@ -1,13 +1,25 @@
 <ActionBar class="action-bar">
-  <NavigationButton visibility="hidden"></NavigationButton>
-  <GridLayout columns="50, *">
-    <Label class="action-bar-title" text="Browse" colSpan="2"></Label>
-
-    <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
-  </GridLayout>
+  <NavigationButton (tap)="onBack()"></NavigationButton>
+  <Label class="action-bar-title" [text]="item?.name || 'Detalle'"></Label>
 </ActionBar>
 
-<GridLayout class="page__content">
-  <Label class="page__content-icon far" text="&#xf1ea;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
-</GridLayout>
+<ScrollView>
+  <StackLayout class="p-20">
+    <Label [text]="item?.name || ''" fontSize="24" fontWeight="bold" textWrap="true" class="m-b-10"></Label>
+
+    <GridLayout columns="auto, *" class="m-b-5">
+      <Label col="0" class="fas p-r-5" text="&#xf02b;" color="#3c6e71" fontSize="16"></Label>
+      <Label col="1" [text]="'Categoría: ' + (item?.category || '')" fontSize="16" color="#555"></Label>
+    </GridLayout>
+
+    <GridLayout columns="auto, *" class="m-b-15">
+      <Label col="0" class="fas p-r-5" text="&#xf155;" color="#4caf50" fontSize="16"></Label>
+      <Label col="1" [text]="item ? '$' + item.price : ''" fontSize="20" fontWeight="bold" color="#4caf50"></Label>
+    </GridLayout>
+
+    <StackLayout backgroundColor="#eeeeee" height="1" class="m-b-15"></StackLayout>
+
+    <Label text="Descripción" fontSize="14" color="#888" class="m-b-5"></Label>
+    <Label [text]="item?.description || ''" fontSize="15" textWrap="true" lineHeight="5"></Label>
+  </StackLayout>
+</ScrollView>

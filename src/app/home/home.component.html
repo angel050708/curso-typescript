@@ -1,13 +1,31 @@
 <ActionBar class="action-bar">
   <NavigationButton visibility="hidden"></NavigationButton>
   <GridLayout columns="50, *">
-    <Label class="action-bar-title" text="Home" colSpan="2"></Label>
-
+    <Label class="action-bar-title" text="Catálogo" colSpan="2"></Label>
     <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
   </GridLayout>
 </ActionBar>
 
-<GridLayout class="page__content">
-  <Label class="page__content-icon fas" text="&#xf015;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+<GridLayout rows="*, auto">
+  <PullToRefresh row="0" (refresh)="onRefresh($event)">
+    <ListView [items]="items" class="list-group" (itemTap)="onItemTap($event)">
+      <ng-template let-item="item">
+        <GridLayout columns="*, auto" class="list-group-item" height="70">
+          <StackLayout col="0" verticalAlignment="center">
+            <Label [text]="item.name" class="list-group-item-heading" textWrap="true"></Label>
+            <Label [text]="item.category + '  ·  $' + item.price" class="list-group-item-text"></Label>
+          </StackLayout>
+          <Label col="1" class="fas p-10" text="&#xf02b;" fontSize="22" color="#3c6e71"
+                 (tap)="onCategoryTap(item)"
+                 (doubleTap)="onTagDoubleTap($event)">
+          </Label>
+        </GridLayout>
+      </ng-template>
+    </ListView>
+  </PullToRefresh>
+
+  <Label row="1" #toastLabel [text]="toastMessage"
+         backgroundColor="#333333" color="white"
+         textAlignment="center" padding="12" fontSize="14" opacity="0">
+  </Label>
 </GridLayout>

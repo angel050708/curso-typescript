@@ -1,22 +1,30 @@
-import { Component, OnInit } from '@angular/core'
-import { RadSideDrawer } from 'nativescript-ui-sidedrawer'
-import { Application } from '@nativescript/core'
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { RouterExtensions } from '@nativescript/angular';
+import { Item } from '../shared/item.model';
+import { ItemsService } from '../shared/items.service';
 
 @Component({
   selector: 'Browse',
   templateUrl: './browse.component.html',
 })
 export class BrowseComponent implements OnInit {
-  constructor() {
-    // Use the component constructor to inject providers.
-  }
+  item: Item | undefined;
+
+  constructor(
+    private route: ActivatedRoute,
+    private routerExtensions: RouterExtensions,
+    private itemsService: ItemsService,
+  ) {}
 
   ngOnInit(): void {
-    // Init your component properties here.
+    const idParam = this.route.snapshot.params['id'];
+    if (idParam) {
+      this.item = this.itemsService.getById(+idParam);
+    }
   }
 
-  onDrawerButtonTap(): void {
-    const sideDrawer = <RadSideDrawer>Application.getRootView()
-    sideDrawer.showDrawer()
+  onBack(): void {
+    this.routerExtensions.back();
   }
 }
