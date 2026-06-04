@@ -2,8 +2,12 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Application, Dialogs, GestureEventData } from '@nativescript/core';
 import { RouterExtensions } from '@nativescript/angular';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Item } from '../shared/item.model';
 import { ItemsService } from '../shared/items.service';
+import { AppState } from '../store/app.state';
+import { selectReadNowItems } from '../store/read-now.selectors';
 
 const CATEGORIES = ['Tecnología', 'Ropa', 'Hogar', 'Deportes', 'Libros'];
 
@@ -16,11 +20,15 @@ export class HomeComponent implements OnInit {
 
   items: Item[] = [];
   toastMessage = '';
+  readNowItems$: Observable<Item[]>;
 
   constructor(
     private routerExtensions: RouterExtensions,
     private itemsService: ItemsService,
-  ) {}
+    private store: Store<AppState>,
+  ) {
+    this.readNowItems$ = this.store.select(selectReadNowItems);
+  }
 
   ngOnInit(): void {
     this.items = this.itemsService.getAll();

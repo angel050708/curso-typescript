@@ -1,13 +1,32 @@
 <ActionBar class="action-bar">
   <NavigationButton visibility="hidden"></NavigationButton>
   <GridLayout columns="50, *">
-    <Label class="action-bar-title" text="Featured" colSpan="2"></Label>
-
+    <Label class="action-bar-title" text="Favoritos" colSpan="2"></Label>
     <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
   </GridLayout>
 </ActionBar>
 
-<GridLayout class="page__content">
-  <Label class="page__content-icon fas" text="&#xf005;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+<GridLayout rows="*">
+  <Label *ngIf="favorites.length === 0"
+         text="Sin favoritos aún. Agrega desde Buscar."
+         textAlignment="center" verticalAlignment="center"
+         color="#888" fontSize="16" textWrap="true">
+  </Label>
+
+  <ListView [items]="favorites" class="list-group" *ngIf="favorites.length > 0">
+    <ng-template let-item="item">
+      <FlexboxLayout flexDirection="row" alignItems="center" padding="10" class="list-group-item">
+        <FlexboxLayout flexDirection="column" flexGrow="1" paddingRight="10">
+          <Label [text]="item.name" fontSize="16" fontWeight="bold" textWrap="true"></Label>
+          <Label [text]="item.category + '  ·  $' + item.price" fontSize="12" color="#888"></Label>
+        </FlexboxLayout>
+        <Label class="fas" text="&#xf02d;" fontSize="20" color="#3c6e71" margin="0 8"
+               (tap)="onReadNow(item)">
+        </Label>
+        <Label class="fas" text="&#xf00d;" fontSize="20" color="#e53935"
+               (tap)="onRemoveFavorite(item)">
+        </Label>
+      </FlexboxLayout>
+    </ng-template>
+  </ListView>
 </GridLayout>

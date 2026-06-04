@@ -1,0 +1,19 @@
+<ActionBar class="action-bar">
+  <NavigationButton text="Volver" (tap)="onBack()"></NavigationButton>
+  <Label class="action-bar-title" text="Editar usuario"></Label>
+</ActionBar>
+
+<StackLayout class="p-20">
+  <Label text="Nombre de usuario" fontSize="14" color="#888" class="m-b-8"></Label>
+  <TextField [(ngModel)]="username"
+             name="username"
+             hint="Ingresa tu nombre"
+             fontSize="18"
+             class="m-b-20"
+             returnKeyType="done">
+  </TextField>
+  <Button text="Guardar"
+          class="btn btn-primary"
+          (tap)="onSave()">
+  </Button>
+</StackLayout>

@@ -6,8 +6,22 @@
   </GridLayout>
 </ActionBar>
 
-<GridLayout rows="*, auto">
-  <PullToRefresh row="0" (refresh)="onRefresh($event)">
+<GridLayout rows="auto, *, auto">
+  <StackLayout row="0" *ngIf="(readNowItems$ | async)?.length > 0"
+               backgroundColor="#e8f5e9" padding="10">
+    <Label text="Leer Ahora" fontSize="14" fontWeight="bold" color="#388e3c" class="m-b-5"></Label>
+    <ListView [items]="readNowItems$ | async" height="120">
+      <ng-template let-item="item">
+        <FlexboxLayout flexDirection="row" alignItems="center" padding="6">
+          <Label class="fas" text="&#xf02d;" fontSize="18" color="#388e3c" width="30"></Label>
+          <Label [text]="item.name" fontSize="14" flexGrow="1" textWrap="true"></Label>
+          <Label [text]="'$' + item.price" fontSize="13" color="#4caf50"></Label>
+        </FlexboxLayout>
+      </ng-template>
+    </ListView>
+  </StackLayout>
+
+  <PullToRefresh row="1" (refresh)="onRefresh($event)">
     <ListView [items]="items" class="list-group" (itemTap)="onItemTap($event)">
       <ng-template let-item="item">
         <GridLayout columns="*, auto" class="list-group-item" height="70">
@@ -24,7 +38,7 @@
     </ListView>
   </PullToRefresh>
 
-  <Label row="1" #toastLabel [text]="toastMessage"
+  <Label row="2" #toastLabel [text]="toastMessage"
          backgroundColor="#333333" color="white"
          textAlignment="center" padding="12" fontSize="14" opacity="0">
   </Label>

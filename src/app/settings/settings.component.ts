@@ -1,22 +1,29 @@
-import { Component, OnInit } from '@angular/core'
-import { RadSideDrawer } from 'nativescript-ui-sidedrawer'
-import { Application } from '@nativescript/core'
+import { Component, OnInit } from '@angular/core';
+import { Application, ApplicationSettings } from '@nativescript/core';
+import { RouterExtensions } from '@nativescript/angular';
+import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+
+const USERNAME_KEY = 'username';
 
 @Component({
   selector: 'Settings',
   templateUrl: './settings.component.html',
 })
 export class SettingsComponent implements OnInit {
-  constructor() {
-    // Use the component constructor to inject providers.
-  }
+  username = '';
+
+  constructor(private routerExtensions: RouterExtensions) {}
 
   ngOnInit(): void {
-    // Init your component properties here.
+    this.username = ApplicationSettings.getString(USERNAME_KEY, 'Sin nombre');
   }
 
   onDrawerButtonTap(): void {
-    const sideDrawer = <RadSideDrawer>Application.getRootView()
-    sideDrawer.showDrawer()
+    const sideDrawer = <RadSideDrawer>Application.getRootView();
+    sideDrawer.showDrawer();
+  }
+
+  onEditUsername(): void {
+    this.routerExtensions.navigate(['/settings/edit-username']);
   }
 }

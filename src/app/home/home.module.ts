@@ -6,7 +6,11 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
 @NgModule({
-  imports: [NativeScriptCommonModule, HomeRoutingModule, NativeScriptUIPullToRefreshModule],
+  imports: [
+    NativeScriptCommonModule,
+    HomeRoutingModule,
+    NativeScriptUIPullToRefreshModule,
+  ],
   declarations: [HomeComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Application, GestureEventData } from '@nativescript/core';
+import { Application } from '@nativescript/core';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import { Item } from '../shared/item.model';
-import { ItemsService } from '../shared/items.service';
+import { ApiService } from '../shared/api.service';
+import { FavoritesService } from '../shared/favorites.service';
 
 @Component({
   selector: 'Search',
@@ -12,10 +13,13 @@ export class SearchComponent implements OnInit {
   searchTerm = '';
   filteredItems: Item[] = [];
 
-  constructor(private itemsService: ItemsService) {}
+  constructor(
+    private apiService: ApiService,
+    private favoritesService: FavoritesService,
+  ) {}
 
   ngOnInit(): void {
-    this.filteredItems = this.itemsService.getAll();
+    this.loadItems('');
   }
 
   onDrawerButtonTap(): void {
@@ -24,24 +28,21 @@ export class SearchComponent implements OnInit {
   }
 
   onSearch(): void {
-    const term = this.searchTerm.toLowerCase().trim();
-    if (!term || term.length < 2) {
-      this.filteredItems = this.itemsService.getAll();
-      return;
-    }
-    this.filteredItems = this.itemsService
-      .getAll()
-      .filter(i =>
-        i.name.toLowerCase().includes(term) ||
-        i.category.toLowerCase().includes(term)
-      );
+    this.loadItems(this.searchTerm);
   }
 
-  onSearchIconDoubleTap(event: GestureEventData): void {
-    const view = event.view as any;
-    view.rotate = 0;
-    view.animate({ rotate: 360, duration: 500 }).then(() => {
-      view.rotate = 0;
+  private loadItems(query: string): void {
+    this.apiService.searchItems(query).subscribe({
+      next: (items) => (this.filteredItems = items),
+      error: () => (this.filteredItems = []),
     });
+  }
+
+  isFavorite(item: Item): boolean {
+    return this.favoritesService.isFavorite(item.id);
+  }
+
+  toggleFavorite(item: Item): void {
+    this.favoritesService.toggle(item);
   }
 }

@@ -2,12 +2,20 @@
   <NavigationButton visibility="hidden"></NavigationButton>
   <GridLayout columns="50, *">
     <Label class="action-bar-title" text="Settings" colSpan="2"></Label>
-
     <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
   </GridLayout>
 </ActionBar>
 
-<GridLayout class="page__content">
-  <Label class="page__content-icon fas" text="&#xf013;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
-</GridLayout>
+<StackLayout class="page__content p-20">
+  <Label class="fas t-36 p-b-10" text="&#xf013;" textAlignment="center" color="#3c6e71"></Label>
+
+  <StackLayout class="m-b-20 p-15" backgroundColor="#f5f5f5" borderRadius="8">
+    <Label text="Nombre de usuario" fontSize="12" color="#888" class="m-b-5"></Label>
+    <Label [text]="username" fontSize="20" fontWeight="bold" color="#333"></Label>
+  </StackLayout>
+
+  <Button text="Editar nombre de usuario"
+          class="btn btn-primary"
+          (tap)="onEditUsername()">
+  </Button>
+</StackLayout>

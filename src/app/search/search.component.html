@@ -6,30 +6,23 @@
   </GridLayout>
 </ActionBar>
 
-<GridLayout rows="auto, auto, *">
-  <StackLayout row="0" ngForm #sf="ngForm" class="m-10">
+<GridLayout rows="auto, *">
+  <StackLayout row="0" class="m-10">
     <GridLayout columns="*, auto">
       <TextField col="0"
                  hint="Buscar productos..."
                  [(ngModel)]="searchTerm"
-                 [minSearchLength]="2"
-                 #searchCtrl="ngModel"
                  name="busqueda"
                  returnKeyType="search"
-                 (textChange)="onSearch()">
+                 (returnPress)="onSearch()">
       </TextField>
       <Label col="1" class="fas p-10" text="&#xf002;" fontSize="22" color="#3c6e71"
-             (doubleTap)="onSearchIconDoubleTap($event)">
+             (tap)="onSearch()">
       </Label>
     </GridLayout>
-
-    <Label *ngIf="searchCtrl.errors && searchTerm.length > 0"
-           text="Mínimo 2 caracteres para buscar"
-           color="#e53935" fontSize="12" class="m-t-5">
-    </Label>
   </StackLayout>
 
-  <ListView row="2" [items]="filteredItems" class="list-group">
+  <ListView row="1" [items]="filteredItems" class="list-group">
     <ng-template let-item="item">
       <FlexboxLayout flexDirection="row" alignItems="center" padding="10" class="list-group-item">
         <Label class="fas" text="&#xf07a;" fontSize="28" width="40"
@@ -39,7 +32,11 @@
           <Label [text]="item.name" fontSize="16" fontWeight="bold" textWrap="true"></Label>
           <Label [text]="item.category" fontSize="12" color="#888"></Label>
         </FlexboxLayout>
-        <Label [text]="'$' + item.price" fontSize="16" fontWeight="bold" color="#4caf50"></Label>
+        <Label [text]="'$' + item.price" fontSize="16" fontWeight="bold" color="#4caf50" marginRight="12"></Label>
+        <Label class="fas" fontSize="22" color="#e53935"
+               [text]="isFavorite(item) ? '&#xf005;' : '&#xf006;'"
+               (tap)="toggleFavorite(item)">
+        </Label>
       </FlexboxLayout>
     </ng-template>
   </ListView>
