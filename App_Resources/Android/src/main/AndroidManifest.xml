@@ -12,6 +12,10 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.INTERNET"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.CAMERA"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	<uses-permission android:name="android.permission.VIBRATE"/>
+	<uses-feature android:name="android.hardware.camera" android:required="false"/>
 
 	<application
 		android:name="com.tns.NativeScriptApplication"
@@ -31,6 +35,10 @@
 			android:exported="true">
 
 			<meta-data android:name="SET_THEME_ON_LAUNCH" android:resource="@style/AppTheme" />
+			<!-- REEMPLAZAR con tu propia API key de Google Maps -->
+			<meta-data
+				android:name="com.google.android.geo.API_KEY"
+				android:value="TU_GOOGLE_MAPS_API_KEY_AQUI"/>
 
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

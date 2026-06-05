@@ -28,6 +28,14 @@ const routes: Routes = [
     path: 'players',
     loadChildren: () => import('~/app/players/players.module').then((m) => m.PlayersModule),
   },
+  {
+    path: 'camera',
+    loadChildren: () => import('~/app/camera/camera.module').then((m) => m.CameraModule),
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('~/app/map/map.module').then((m) => m.MapModule),
+  },
 ]
 
 @NgModule({

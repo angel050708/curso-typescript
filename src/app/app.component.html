@@ -58,6 +58,26 @@
           <Label col="1" text="Players" class="p-r-10"></Label>
         </GridLayout>
 
+        <GridLayout
+          columns="auto, *"
+          class="nt-drawer__list-item"
+          [class.-selected]="isComponentSelected('/camera')"
+          (tap)="onNavItemTap('/camera')"
+        >
+          <Label col="0" text="&#xf030;" class="nt-icon fas"></Label>
+          <Label col="1" text="Cámara" class="p-r-10"></Label>
+        </GridLayout>
+
+        <GridLayout
+          columns="auto, *"
+          class="nt-drawer__list-item"
+          [class.-selected]="isComponentSelected('/map')"
+          (tap)="onNavItemTap('/map')"
+        >
+          <Label col="0" text="&#xf3c5;" class="nt-icon fas"></Label>
+          <Label col="1" text="Mapa" class="p-r-10"></Label>
+        </GridLayout>
+
         <StackLayout class="hr"></StackLayout>
 
         <GridLayout
@@ -75,5 +95,18 @@
 
   <GridLayout tkMainContent>
     <page-router-outlet></page-router-outlet>
+    <!-- Toast para notificaciones Firebase en primer plano -->
+    <Label #notifToast
+           [text]="notifMessage"
+           verticalAlignment="bottom"
+           backgroundColor="#1565c0"
+           color="white"
+           textAlignment="center"
+           padding="14"
+           fontSize="14"
+           textWrap="true"
+           opacity="0"
+           margin="0">
+    </Label>
   </GridLayout>
 </RadSideDrawer>

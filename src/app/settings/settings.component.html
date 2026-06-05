@@ -6,16 +6,43 @@
   </GridLayout>
 </ActionBar>
 
-<StackLayout class="page__content p-20">
-  <Label class="fas t-36 p-b-10" text="&#xf013;" textAlignment="center" color="#3c6e71"></Label>
+<ScrollView>
+  <StackLayout class="page__content p-20">
+    <Label class="fas t-36 p-b-10" text="&#xf013;" textAlignment="center" color="#3c6e71"></Label>
 
-  <StackLayout class="m-b-20 p-15" backgroundColor="#f5f5f5" borderRadius="8">
-    <Label text="Nombre de usuario" fontSize="12" color="#888" class="m-b-5"></Label>
-    <Label [text]="username" fontSize="20" fontWeight="bold" color="#333"></Label>
+    <StackLayout class="m-b-20 p-15" backgroundColor="#f5f5f5" borderRadius="8">
+      <Label text="Nombre de usuario" fontSize="12" color="#888" class="m-b-5"></Label>
+      <Label [text]="username" fontSize="20" fontWeight="bold" color="#333"></Label>
+    </StackLayout>
+
+    <Button text="Editar nombre de usuario"
+            class="btn btn-primary m-b-20"
+            (tap)="onEditUsername()">
+    </Button>
+
+    <!-- Firebase FCM Token -->
+    <StackLayout class="m-b-20 p-15" backgroundColor="#e3f2fd" borderRadius="8">
+      <Label text="&#xf1d8;  Firebase FCM Token" fontSize="14" fontWeight="bold"
+             color="#1565c0" class="m-b-8"></Label>
+      <Label [text]="firebaseToken"
+             fontSize="11"
+             color="#0d47a1"
+             textWrap="true"
+             lineBreakMode="wordWrap">
+      </Label>
+    </StackLayout>
+
+    <!-- Social Share - Texto -->
+    <StackLayout class="m-b-10 p-15" backgroundColor="#f3e5f5" borderRadius="8">
+      <Label text="Compartir contenido" fontSize="14" fontWeight="bold"
+             color="#6a1b9a" class="m-b-8"></Label>
+      <Button text="&#xf1e0;  Compartir texto"
+              backgroundColor="#7b1fa2"
+              color="white"
+              borderRadius="6"
+              padding="10"
+              (tap)="onShareText()">
+      </Button>
+    </StackLayout>
   </StackLayout>
-
-  <Button text="Editar nombre de usuario"
-          class="btn btn-primary"
-          (tap)="onEditUsername()">
-  </Button>
-</StackLayout>
+</ScrollView>

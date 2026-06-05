@@ -1,0 +1,58 @@
+<ActionBar class="action-bar">
+  <NavigationButton visibility="hidden"></NavigationButton>
+  <GridLayout columns="50, *">
+    <Label class="action-bar-title" text="Cámara" colSpan="2"></Label>
+    <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
+  </GridLayout>
+</ActionBar>
+
+<ScrollView>
+  <StackLayout class="page__content p-20">
+    <Label class="fas t-36 p-b-10" text="&#xf030;" textAlignment="center" color="#3c6e71"></Label>
+
+    <!-- Vista previa de la foto -->
+    <StackLayout class="m-b-20" minHeight="220" backgroundColor="#eceff1"
+                 borderRadius="8" verticalAlignment="center">
+      <Image *ngIf="capturedImage"
+             [src]="capturedImage"
+             stretch="aspectFit"
+             height="220"
+             borderRadius="8">
+      </Image>
+      <Label *ngIf="!capturedImage"
+             text="Sin foto"
+             textAlignment="center"
+             verticalAlignment="center"
+             color="#90a4ae"
+             fontSize="16"
+             height="220">
+      </Label>
+    </StackLayout>
+
+    <!-- Botón tomar foto -->
+    <Button text="&#xf030;  Tomar foto"
+            class="btn btn-primary m-b-10"
+            (tap)="onTakePhoto()">
+    </Button>
+
+    <!-- Social Share - imagen de cámara -->
+    <Button text="&#xf1e0;  Compartir foto"
+            backgroundColor="#0288d1"
+            color="white"
+            borderRadius="6"
+            padding="10"
+            class="m-b-10"
+            [isEnabled]="!!capturedImage"
+            (tap)="onShareImage()">
+    </Button>
+
+    <!-- Social Share - texto -->
+    <Button text="&#xf1e0;  Compartir texto"
+            backgroundColor="#7b1fa2"
+            color="white"
+            borderRadius="6"
+            padding="10"
+            (tap)="onShareText()">
+    </Button>
+  </StackLayout>
+</ScrollView>

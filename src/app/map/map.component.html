@@ -1,0 +1,24 @@
+<ActionBar class="action-bar">
+  <NavigationButton visibility="hidden"></NavigationButton>
+  <GridLayout columns="50, *">
+    <Label class="action-bar-title" text="Mapa" colSpan="2"></Label>
+    <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
+  </GridLayout>
+</ActionBar>
+
+<GridLayout rows="auto, *">
+  <StackLayout row="0" backgroundColor="#e8f5e9" padding="10">
+    <Label text="&#xf3c5;  Buenos Aires, Argentina"
+           fontSize="14" fontWeight="bold" color="#2e7d32"
+           textAlignment="center">
+    </Label>
+  </StackLayout>
+
+  <MapView
+    row="1"
+    [latitude]="latitude"
+    [longitude]="longitude"
+    [zoom]="zoom"
+    (mapReady)="onMapReady($event)">
+  </MapView>
+</GridLayout>
